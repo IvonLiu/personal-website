@@ -1,0 +1,214 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: #000;
+    height: 100%;
+}
+
+.fullscreen {
+    width:100%;
+    min-height:100%;
+}
+
+.background-image {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+div.content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Styles for the header slide */
+
+.header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    /*-webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;*/
+    justify-content: center;
+    flex-direction: row;
+    /*align-items: center;*/
+}
+
+.header-content {
+    align-self: center;
+}
+
+.more {
+    align-self: flex-end;
+}
+
+.profile-circle {
+    position: relative;
+    left: 50%;
+    width: 160px;
+    height: 160px;
+    margin-left: -80px;
+    border-radius: 50% 50% 50% 50%;
+}
+
+.profile-circle .active-circle .profile-image {
+    opacity: 1;
+}
+
+.profile-circle .profile-image {
+    opacity: 0;
+}
+
+.profile-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity .3s ease-in-out;
+}
+
+img.bordered-circle {
+    border-radius:50% 50% 50% 50%;
+    border: 2px solid black; 
+}
+
+.header-text-container {
+    text-align: center
+}
+
+.header-text {
+    color: white;
+    font-weight: 200;
+}
+
+.social-links {
+    padding: 4px;
+}
+
+.social-links li {
+    font-size: 150%;
+    line-height: 150%;
+    display: inline-block;
+    margin: 6px;
+}
+
+.social-links i {
+    color: white;
+    opacity: 0.75;
+}
+
+.social-links i:hover {
+    opacity: 1;
+}
+
+.btn-circle {
+    position: absolute;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -64px;
+    width: 40px;
+    height: 40px;
+    padding: 2px 12px;
+    border: 2px solid #fff;
+    border-radius: 35px;
+    font-size: 40px;
+    color: #fff;
+    background: 0 0;
+    -webkit-transition: background .3s ease-in-out;
+    -moz-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+}
+
+.btn-circle:hover {
+    outline: 0;
+    color: #fff;
+    background: rgba(255,255,255,.1);
+}
+
+.btn-circle i.animated {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+}
+
+.btn-circle:hover i.animated {
+    -webkit-animation-name: pulse;
+    -moz-animation-name: pulse;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-timing-function: linear;
+}
+
+/* Styles for slide1 */
+
+.slide1 {
+    background: #eeeeee;
+    padding-top: 16px;
+}
+
+.card .card-action a {
+    color: #009688;
+}
+
+.card .card-action a:hover {
+    color: #80CBC4;
+}
+
+.slide1-title {
+    color: #333333;
+    text-align: center;
+}
+
+/* Styles for footer */
+
+.footer {
+    background: #222222;
+    height: 64px;
+    color: #5C5E5F;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    /*-webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;*/
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 6px;
+    padding-right: 24px;
+}
+
+.footer a {
+    text-transform: uppercase;
+    color: #5C5E5F;
+    opacity: 1;   
+    transition: opacity .3s ease-in-out;
+}
+
+.footer a:hover {
+    opacity: 0.75;
+}
+
+.nav-links {
+    padding: 4px;
+}
+
+.nav-links li {
+    display: inline-block;
+    margin-left: 6px;
+    margin-right: 6px;
+}

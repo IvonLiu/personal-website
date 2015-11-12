@@ -1,0 +1,117 @@
+body {
+	width: 2200px;
+	height: 2600px;
+}
+
+.background-gradient {
+    background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.4));
+    width: 100%;
+}
+
+.card .card-action a {
+    color: #009688;
+}
+
+.card .card-action a:hover {
+    color: #80CBC4;
+}
+
+.slide {
+	height: 400px;
+}
+
+/**
+ * Slide 1
+ */
+
+#slide1 {
+	position: absolute;
+	top: 200;
+	left: 300;
+	width:800px;
+	height:400px;
+}
+
+#slide1 .slide-image {
+	float: left;
+	width: 429px;
+	overflow: hidden;
+}
+
+#slide1 .slide-content {
+	float: left;
+	width: 371;
+	overflow: hidden;
+}
+
+#slide1 img {
+	width: 413px;
+}
+
+#slide1 span {
+	position: relative;
+	top: 12px;
+}
+
+#slide1 p {
+	margin-left: 16px;
+	padding-right: 16px;
+	position: relative;
+	top: 12px;
+}
+
+/**
+ * Slide 2
+ */
+
+#slide2 {
+	position: absolute;
+	top: 180;
+	left: 1400;
+	width: 500px;
+}
+
+/**
+ * Slide 3
+ */
+
+#slide3 {
+	position: absolute;
+	top: 880;
+	left: 700;
+	width:500px;
+}
+
+/**
+ * Slide 4
+ */
+
+#slide4 {
+	position: absolute;
+	top: 1800;
+	left: 350;
+	width: 500px;
+}
+
+.tabs .tab a {
+	color: black;
+}
+
+.tabs .tab a:hover {
+	color: #bdc3c7;
+}
+
+.tabs .indicator {
+	background-color: black;
+}
+
+/**
+ * Slide 5
+ */
+
+#slide5 {
+	position: absolute;
+	top:1750;
+	left: 1300;
+	width: 500px;
+}

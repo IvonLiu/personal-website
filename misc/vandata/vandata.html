@@ -1,0 +1,132 @@
+<html>
+
+    <head>
+        <title>ByteMe</title>
+
+        <link type="text/css" rel="stylesheet" href="../../css/materialize.min.css"  media="screen,projection"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+        <link type="text/css" rel="stylesheet" href="../../css/main.css"/>
+        
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+
+        <img src="images/background.png" class="background-image"/>
+
+        <div class="content">
+            
+            <div id="header" class="fullscreen header">
+                <div class="header-content">
+                    <div class="header-text-container">
+                        <h1 class="header-text">DataSense VanData | ByteMe</h1>
+                        <h5 class="header-text">Ivon Liu &bull; Jason Wong &bull; Alex Jordache</h5>
+                    </div>
+                </div>
+                <div class="more">
+                    <a id="more" href="#" class="btn btn-circle"><i class="fa fa-angle-down animated"></i></a>
+                </div>
+            </div>
+
+            <div id="slide1" class="fullscreen slide1">
+                <h1 class="slide1-title">Results</h1>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <h4>Overview</h4>
+                            <p>How many computer services are created per year in Kitsilano? In Downtown? How many vending machines are installed per year in Mount Pleasant? In Kerrisdale? Let's find out!</p>
+                            <p>The aim of this program is to allow the City of Vancouver to have a sense of approximately how many new businesses will be opening, such that it will be able to understand the growing business trend within the area. By inputting the business type and local area, it is capable of accurately predicting business trend and number of businesses in the upcoming year with the help of a few machine learning algorithms, such as Markov Chain Monte Carlo.</p>
+                        </div>
+                        <div class="col s10 offset-s1">
+                            <h4>Beautiful Graph Samples</h4>
+                            <p>For example, when one inputs Computer Services for business type and 02-Central Business/Downtown for local area, it will output a bar graph that describes the trend of number of new Computer Services businesses in Downtown for the years between 1997 and 2014. Here you can see the graphs for Computer Services in three sample areas.</p>
+                        </div>
+                        <div class="col s8 offset-s2">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="images/computerservices_downtown.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s8 offset-s2">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="images/computerservices_fairview.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s8 offset-s2">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="images/computerservices_dunbar.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s10 offset-s1">
+                            <h4>Prediction</h4>
+                            <p>The heart and soul of this project lies within its prediction powers.</p>
+                            <p>Once you have seen a visual of this trend, a probability distribution of business type in the given area is generated along with the most likely number.</p>
+                            <p>Again, we will be using Computer Services as an example, and specifically in the area 02-Central Business/Downtown.</p>
+                        </div>
+                        <div class="col s8 offset-s2">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="images/poisson.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s10 offset-s1">
+                            <p>From the probability distribution graph, it becomes evident that there will most likely be 384 new Computer Services businesses created in the Central Business/Downtown area this year.</p>
+                            <p>Well, okay. Maybe we cheated a little. It's not that clear from the graph itself. That's why our program takes the mode and gives you a single value, if that's what you want. But we think the graph looks pretty, too.</p>
+                            <p>So, how close are we? Well, we'll have to wait a couple of months to know for sure. But compared to the previous years, it seems like it fits the trend!</p>
+                            <p>*Note: MCMC is a stochastic process, so the results will vary slightly each time the program is run.*</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <ul class="nav-links">
+                        <li><a id="nav-top" href="#">Top</a></li>
+                        <li><a id="nav-projects" href="#">Results</a></li>
+                        <li><a href="https://gist.github.com/IvonLiu/b2927f81a2cf6b5abcd7" target="_blank">Gist</a></li>
+                    </ul>
+                    <p>&copy; Ivon Liu 2015</p>
+                </div>                
+            </div>
+
+        </div>
+
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../../js/materialize.js"></script>
+        <script src="../../js/jquery.easing.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $(function() {
+                    $('#more').bind('click', function(event) {
+                        $('html, body').stop().animate({
+                            scrollTop: $("#slide1").offset().top
+                        }, 700, 'easeInOutExpo');
+                        event.preventDefault();
+                    });
+                   $('#nav-top').bind('click', function(event) {
+                        $('html, body').stop().animate({
+                            scrollTop: $("#header").offset().top
+                        }, 700, 'easeInOutExpo');
+                        event.preventDefault();
+                    });
+                    $('#nav-projects').bind('click', function(event) {
+                        $('html, body').stop().animate({
+                            scrollTop: $("#slide1").offset().top
+                        }, 700, 'easeInOutExpo');
+                        event.preventDefault();
+                    });
+                });
+            });  
+        </script>
+
+    </body>
+</html>

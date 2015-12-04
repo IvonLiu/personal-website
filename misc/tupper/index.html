@@ -5,7 +5,7 @@
 		<!-- Latest compiled and minified CSS -->
 		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	
-		<!-- BigInteger -->
+		<!-- Libraries -->
 		<script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
 
     <!-- Import angular.js -->
@@ -39,8 +39,8 @@
 		    <!-- Collect the nav links, forms, and other content for toggling -->
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		      <ul class="nav navbar-nav navbar-right">
-		        <li id="nav-display"><a href="#/display">Display</a></li>
-						<li id="nav-generate"><a href="#/generate">Generate</a></li>
+		        <li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
+						<li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>
 		      </ul>
 		    </div>
 		  </div>
@@ -55,7 +55,7 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">Binary</div>
 						  <div class="panel-body">
-							  <div>
+							  <div class="noselect">
 							  	<div ng-repeat="row in bitmap">
 							  		<div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block">
 							  			<p ng-show="cell==1">1</p>
@@ -72,9 +72,9 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">Graph</div>
 						  <div class="panel-body">
-							  <div id="graph">
+							  <div id="graph" class="noselect">
 							  	<div ng-repeat="row in bitmap">
-							  		<div ng-repeat="cell in row track by $index" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block"></div>
+							  		<div ng-repeat="cell in row track by $index" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;min-height:{{cellSize}}px;display:inline-block"></div>
 						  		</div>
 							  </div>
 						  </div>
@@ -118,7 +118,42 @@
 
 		<script type="text/ng-template" id="/generate.html">
 			<div class="container">
-				<h4 align="center" style="padding-top:10%">This page is under construction</h4>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="panel panel-default">
+						  <div class="panel-heading">Draw</div>
+						  <div class="panel-body">
+							  <div id="graph" class="noselect" style="border:1px solid #ccc">
+							  	<div ng-repeat="row in bitmap">
+							  		<div ng-repeat="cell in row track by $index" ng-click="toggleCell($parent.$index, $index)" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block"></div>
+						  		</div>
+							  </div>
+							  <form>
+							  	<div class="form-group">
+							  		<button class="btn btn-default col-xs-12" ng-click="clear()">Clear</button>
+						  		</div>
+					  		</form>
+						  </div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Generated value of k</div>
+							<div class="panel-body">
+								<form>
+									<div class="form-group">
+										<pre><code>{{k}}</code></pre>
+									</div>
+							 		<div class="form-group">
+					      		<button class="btn btn-default col-xs-12" ng-click="generate()">Generate</button>
+							  	</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</script>
 

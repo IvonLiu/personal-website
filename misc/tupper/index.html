@@ -1,161 +1,161 @@
 <html>
-	<head>
-		<title>Tupper</title>
+  <head>
+    <title>Tupper</title>
 
-		<!-- Latest compiled and minified CSS -->
-		<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-	
-		<!-- Libraries -->
-		<script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!-- Libraries -->
+    <script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
 
     <!-- Import angular.js -->
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-		<script src="js/app.js"></script>
-		
-		<link type="text/css" rel="stylesheet" href="css/main.css"/>
-		<style>
-			.table th, .table td { 
-     		border-top: none !important; 
- 			}
-		</style>
-	</head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
+    <script src="js/app.js"></script>
+    
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <style>
+      .table th, .table td { 
+        border-top: none !important; 
+      }
+    </style>
+  </head>
 
-	<body ng-app="tupper">
+  <body ng-app="tupper">
 
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">Tupper's</a>
-		    </div>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Tupper's</a>
+        </div>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav navbar-right">
-		        <li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
-						<li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>
-		      </ul>
-		    </div>
-		  </div>
-		</nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
+            <li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-		<ui-view></ui-view>
+    <ui-view></ui-view>
 
-		<script type="text/ng-template" id="/display.html">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-						  <div class="panel-heading">Binary</div>
-						  <div class="panel-body">
-							  <div class="noselect">
-							  	<div ng-repeat="row in bitmap">
-							  		<div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block">
-							  			<p ng-show="cell==1">1</p>
-							  			<p ng-hide="cell==1" style="color:#ccc">0</p>
-							  		</div>
-						  		</div>
-							  </div>
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-						  <div class="panel-heading">Graph</div>
-						  <div class="panel-body">
-							  <div id="graph" class="noselect">
-							  	<div ng-repeat="row in bitmap">
-							  		<div ng-repeat="cell in row track by $index" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;min-height:{{cellSize}}px;display:inline-block"></div>
-						  		</div>
-							  </div>
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Slider</div>
-							<div class="panel-body">
-								<form>
-									<div class="form-group">
-										<input type="range" style="width:100%" id="kRange" min="0" max="100" ng-model="kRange"/>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Input value of k</div>
-							<div class="panel-body">
-								<form>
-									<div class="form-group">
-										<textarea class="form-control" rows="5" placeholder="{{k}}" ng-model="k"></textarea>
-									</div>
-							 		<div class="form-group">
-							 			<button class="btn btn-default col-xs-6" ng-click="default()">Reset</button>
-					      		<button type="submit" class="btn btn-default col-xs-6" ng-click="display()">Display</button>
-							  	</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</script>
+    <script type="text/ng-template" id="/display.html">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Binary</div>
+              <div class="panel-body">
+                <div class="noselect">
+                  <div ng-repeat="row in bitmap">
+                    <div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block">
+                      <p ng-show="cell==1">1</p>
+                      <p ng-hide="cell==1" style="color:#ccc">0</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Graph</div>
+              <div class="panel-body">
+                <div id="graph" class="noselect">
+                  <div ng-repeat="row in bitmap">
+                    <div ng-repeat="cell in row track by $index" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;min-height:{{cellSize}}px;display:inline-block"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Slider</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <input type="range" style="width:100%" id="kRange" min="0" max="100" ng-model="kRange"/>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Input value of k</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <textarea class="form-control" rows="5" placeholder="{{k}}" ng-model="k"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-default col-xs-6" ng-click="default()">Reset</button>
+                    <button type="submit" class="btn btn-default col-xs-6" ng-click="display()">Display</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
 
-		<script type="text/ng-template" id="/generate.html">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-						  <div class="panel-heading">Draw</div>
-						  <div class="panel-body">
-							  <div id="graph" class="noselect" style="border:1px solid #ccc">
-							  	<div ng-repeat="row in bitmap">
-							  		<div ng-repeat="cell in row track by $index" ng-click="toggleCell($parent.$index, $index)" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block"></div>
-						  		</div>
-							  </div>
-							  <form>
-							  	<div class="form-group">
-							  		<button class="btn btn-default col-xs-12" ng-click="clear()">Clear</button>
-						  		</div>
-					  		</form>
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="panel panel-default">
-							<div class="panel-heading">Generated value of k</div>
-							<div class="panel-body">
-								<form>
-									<div class="form-group">
-										<pre><code>{{k}}</code></pre>
-									</div>
-							 		<div class="form-group">
-					      		<button class="btn btn-default col-xs-12" ng-click="generate()">Generate</button>
-							  	</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</script>
+    <script type="text/ng-template" id="/generate.html">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Draw</div>
+              <div class="panel-body">
+                <div id="graph" class="noselect" style="border:1px solid #ccc">
+                  <div ng-repeat="row in bitmap">
+                    <div ng-repeat="cell in row track by $index" ng-click="toggleCell($parent.$index, $index)" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block"></div>
+                  </div>
+                </div>
+                <form>
+                  <div class="form-group">
+                    <button class="btn btn-default col-xs-12" ng-click="clear()">Clear</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">Generated value of k</div>
+              <div class="panel-body">
+                <form>
+                  <div class="form-group">
+                    <pre><code>{{k}}</code></pre>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-default col-xs-12" ng-click="generate()">Generate</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -165,6 +165,6 @@
 
       });
     </script>
-	</body>
+  </body>
 </html>
-	
+  

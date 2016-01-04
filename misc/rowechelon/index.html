@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>row-echelon</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Libraries -->
+
+    <!-- Import angular.js -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+
+  </head>
+
+  <body ng-app="rowEchelon" ng-controller="MainCtrl">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">row-echelon</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <!--<li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
+            <li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Config
+        </div>
+        <div class="panel-body">
+          <form ng-submit="showInput()">
+            <div class="form-group">
+              <label for="numVars">Number of Variables</label>
+              <input id="numVars" type="number" ng-model="numVars" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="numRows">Number of Equations</label>
+              <input id="nRows" type="number" ng-model="numRows" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary col-xs-12">Show Input</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="panel panel-default" ng-show="matrix">
+        <div class="panel-heading">
+          Input Matrix
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tr ng-repeat="row in matrix">
+              <td ng-repeat="cell in row track by $index">
+                <input type="number" class="form-control" ng-model="matrix[$parent.$index][$index]">
+              </td>
+            </tr>
+          </table>
+          <button ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
+        </div>
+      </div>
+
+      <div class="panel panel-default" ng-show="solution">
+        <div class="panel-heading">
+          Solution
+        </div>
+        <div class="panel-body">
+          {{solution}}
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+html {
+    background-color: #282C34;
+}
+
+body {
+    position: relative;
+    width: 40%;
+    left: 30%;
+    font-family: 'lato', sans-serif;
+}
+
+
+.conversation {
+    background-color: #2C323C;
+    padding: 10px;
+}
+
+.chat {
+    padding-bottom:10px;
+}
+
+.chat h2, .chat p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    margin: .3em;
+    color: white;
+    font-weight: 400;
+}
+
+.IvonLiu h2, .IvonLiu p, .AnthonyLiu h2, .AnthonyLiu p {
+    color: white;
+}
+
+.IvonbotInverse h2, .IvonbotInverse p {
+    color: pink;
+}
+
+.ThonybotGiphy h2, .ThonybotGiphy p {
+    color: skyblue;
+}
+
+h1, h3 {
+    color: white;
+    font-weight: 400;
+}
+
+@media screen and (max-device-width: 736px) {
+    body {
+        width:90%;
+        left:5%;
+    }
+
+    .chat h2, .chat p {
+        font-size: 1.5em;
+    }
+}

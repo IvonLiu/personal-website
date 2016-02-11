@@ -1,0 +1,134 @@
+<html>
+
+<head>
+  <title>Voltorb</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries -->
+
+  <!-- Import angular.js -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="css/voltorb.css" />
+
+</head>
+
+<body ng-app="voltorb" ng-controller="MainCtrl">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Voltorb</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <!--<li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
+            <li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Board
+      </div>
+      <div class="panel-body">
+        <div id="board">
+          <div ng-repeat="row in board">
+            <div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+              <div class="card-body-border {{cell.isOptimal?'card-optimal':''}} {{cell.isAutofill?'card-autofill':''}}">
+                <div class="row">
+                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
+                    <h4 ng-show="cell.actual == -1">{{beautify(cell.zero)}}</h4>
+                    <h4 ng-hide="cell.actual == -1">--</h4>
+                  </div>
+                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
+                    <h4 ng-show="cell.actual == -1">{{beautify(cell.one)}}</h4>
+                    <h4 ng-hide="cell.actual == -1">--</h4>
+                  </div>
+                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
+                    <h4 ng-show="cell.actual == -1">{{beautify(cell.two)}}</h4>
+                    <h4 ng-hide="cell.actual == -1">--</h4>
+                  </div>
+                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
+                    <h4 ng-show="cell.actual == -1">{{beautify(cell.three)}}</h4>
+                    <h4 ng-hide="cell.actual == -1">--</h4>
+                  </div>
+                  <div class="col-xs-12" style="height:{{cellSize/3}}px">
+                    <input type="number" class="form-control" ng-model="cell.actual">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <label>Points</label>
+                    <input type="number" class="form-control" ng-model="rowConfig[$index].points">
+                  </div>
+                </div>
+                <div class="row" style="margin-top:16px">
+                  <div class="col-xs-12">
+                    <label>Voltorbs</label>
+                    <input type="number" class="form-control" ng-model="rowConfig[$index].voltorbs">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div ng-repeat="cell in colConfig track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <label>Points</label>
+                    <input type="number" class="form-control" ng-model="colConfig[$index].points">
+                  </div>
+                </div>
+                <div class="row" style="margin-top:16px">
+                  <div class="col-xs-12">
+                    <label>Voltorbs</label>
+                    <input type="number" class="form-control" ng-model="colConfig[$index].voltorbs">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
+      </div>
+    </div>
+
+    <!-- <div class="panel panel-default" ng-show="solution">
+        <div class="panel-heading">
+          Solution
+        </div>
+        <div class="panel-body">
+          {{solution}}
+        </div>
+      </div> -->
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

@@ -13,10 +13,16 @@
   background: #33b5e5;
 }
 .card .card-autofill {
+  background: #33b5e5;
+}
+.card .card-voltorb {
+  background: #e74c3c;
+}
+.card .card-safe {
   background: #2ecc71;
 }
 #board h4 {
-  font-size: 1em;
+  font-size: 0.7em;
 }
 #board label {
   font-size: 0.5em;

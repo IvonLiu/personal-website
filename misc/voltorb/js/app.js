@@ -19,6 +19,18 @@ app.factory('voltorb', [function() {
     for (var i = 0; i < numRows; i++) {
       var row = [];
       for (var j = 0; j < numCols; j++) {
+        row.push(-1);
+      }
+      board.push(row);
+    }
+    return board;
+  }
+
+  voltorb.newPBoard = function(numRows, numCols) {
+    var board = [];
+    for (var i = 0; i < numRows; i++) {
+      var row = [];
+      for (var j = 0; j < numCols; j++) {
         row.push({
           zero: 0,
           one: 0,
@@ -32,18 +44,13 @@ app.factory('voltorb', [function() {
     return board;
   }
 
+
   voltorb.copy = function(board) {
     var copy = [];
     for (var i = 0; i < board.length; i++) {
       var row = [];
       for (var j = 0; j < board[i].length; j++) {
-        row.push({
-          zero: board[i][j].zero,
-          one: board[i][j].one,
-          two: board[i][j].two,
-          three: board[i][j].three,
-          actual: board[i][j].actual
-        });
+        row.push(board[i][j]);
       }
       copy.push(row);
     }
@@ -54,8 +61,8 @@ app.factory('voltorb', [function() {
     var copy = voltorb.copy(board);
     for (var row = 0; row < copy.length; row++) {
       for (var col = 0; col < copy[row].length; col++) {
-        if (copy[row][col].actual == -1) {
-          copy[row][col].actual = value;
+        if (copy[row][col] == -1) {
+          copy[row][col] = value;
           return copy;
         }
       }
@@ -63,76 +70,73 @@ app.factory('voltorb', [function() {
     return undefined;
   };
 
-  voltorb.generateRowColCounts = function(board) {
-
-    var rowCounts = [];
-    for (var i = 0; i < board.length; i++) {
-      rowCounts.push({
-        points: 0,
-        voltorbs: 0,
-        unknowns: board[0].length
-      });
-    }
-
-    var colCounts = [];
+  voltorb.rowCount = function(board, row) {
+    var count = {
+      points: 0,
+      voltorbs: 0,
+      unknowns: board[0].length
+    };
     for (var i = 0; i < board[0].length; i++) {
-      colCounts.push({
-        points: 0,
-        voltorbs: 0,
-        unknowns: board.length
-      });
-    }
-
-    for (var row = 0; row < board.length; row++) {
-      for (var col = 0; col < board[row].length; col++) {
-        switch (board[row][col].actual) {
-          case 0:
-            rowCounts[row].voltorbs++;
-            colCounts[col].voltorbs++;
-            rowCounts[row].unknowns--;
-            colCounts[col].unknowns--;
-            break;
-          case 1:
-          case 2:
-          case 3:
-            rowCounts[row].points += board[row][col].actual;
-            colCounts[col].points += board[row][col].actual;
-            rowCounts[row].unknowns--;
-            colCounts[col].unknowns--;
-            break;
-        }
+      switch (board[row][i]) {
+        case 0:
+          count.voltorbs++;
+          count.unknowns--;
+          break;
+        case 1:
+        case 2:
+        case 3:
+          count.points += board[row][i];
+          count.unknowns--;
+          break;
       }
     }
+    return count;
+  }
 
-    return {
-      row: rowCounts,
-      col: colCounts
+  voltorb.colCount = function(board, col) {
+    var count = {
+      points: 0,
+      voltorbs: 0,
+      unknowns: board.length
     };
+    for (var i = 0; i < board.length; i++) {
+      switch (board[i][col]) {
+        case 0:
+          count.voltorbs++;
+          count.unknowns--;
+          break;
+        case 1:
+        case 2:
+        case 3:
+          count.points += board[i][col];
+          count.unknowns--;
+          break;
+      }
+    }
+    return count;
   }
 
   voltorb.isValidIntermediate = function(board, rowConfig, colConfig) {
 
-    var counts = voltorb.generateRowColCounts(board);
-    var rowCounts = counts.row;
-    var colCounts = counts.col;
-
     for (var i = 0; i < rowConfig.length; i++) {
-      if (rowCounts[i].voltorbs > rowConfig[i].voltorbs) {
+      var count = voltorb.rowCount(board, i);
+      if (count.voltorbs > rowConfig[i].voltorbs) {
         return false;
       } else {
-        rowCounts[i].unknowns -= (rowConfig[i].voltorbs - rowCounts[i].voltorbs);
-        if (rowCounts[i].points + rowCounts[i].unknowns > rowConfig[i].points || rowCounts[i].points + 3 * rowCounts[i].unknown < rowConfig[i].points) {
+        count.unknowns -= (rowConfig[i].voltorbs - count.voltorbs);
+        if (count.points + count.unknowns > rowConfig[i].points || count.points + 3 * count.unknown < rowConfig[i].points) {
           return false;
         }
       }
     }
 
     for (var i = 0; i < colConfig.length; i++) {
-      if (colCounts[i].voltorbs > colConfig[i].voltorbs) {
+      var count = voltorb.colCount(board, i);
+      if (count.voltorbs > colConfig[i].voltorbs) {
         return false;
       } else {
-        colCounts[i].unknowns -= (colConfig[i].voltorbs - colCounts[i].voltorbs);
-        if (colCounts[i].points + colCounts[i].unknowns > colConfig[i].points || colCounts[i].points + 3 * colCounts[i].unknown < colConfig[i].points) {
+        count.unknowns -= (colConfig[i].voltorbs - count.voltorbs);
+        if (count.points + count.unknowns > colConfig[i].points || count.points + 3 * count.unknown < colConfig[i].points) {
           return false;
         }
       }
@@ -144,17 +148,15 @@ app.factory('voltorb', [function() {
 
   voltorb.isValidSolution = function(board, rowConfig, colConfig) {
 
-    var counts = voltorb.generateRowColCounts(board);
-    var rowCounts = counts.row;
-    var colCounts = counts.col;
-
     for (var i = 0; i < rowConfig.length; i++) {
-      if (rowCounts[i].points != rowConfig[i].points || rowCounts[i].voltorbs != rowConfig[i].voltorbs) {
+      var count = voltorb.rowCount(board, i);
+      if (count.points != rowConfig[i].points || count.voltorbs != rowConfig[i].voltorbs) {
         return false;
       }
     }
     for (var i = 0; i < colConfig.length; i++) {
-      if (colCounts[i].points != colConfig[i].points || colCounts[i].voltorbs != colConfig[i].voltorbs) {
+      var count = voltorb.colCount(board, i);
+      if (count.points != colConfig[i].points || count.voltorbs != colConfig[i].voltorbs) {
         return false;
       }
     }
@@ -183,19 +185,29 @@ app.factory('voltorb', [function() {
     }
   }
 
-  voltorb.probabilities = function(board, rowConfig, colConfig) {
+  voltorb.generateBoard = function(pBoard) {
+    var board = [];
+    for (var i=0; i<pBoard.length; i++) {
+      var row = [];
+      for (var j=0; j<pBoard[i].length; j++) {
+        row.push(pBoard[i][j].actual);
+      }
+      board.push(row);
+    }
+    return board;
+  }
 
-    console.log(JSON.stringify(board));
+  voltorb.probabilities = function(board, rowConfig, colConfig, callback) {
+
     var solutions = voltorb.solutions(board, rowConfig, colConfig);
-    var pBoard = voltorb.newBoard(rowConfig.length, colConfig.length);
-    console.log(JSON.stringify(board));
+    var pBoard = voltorb.newPBoard(rowConfig.length, colConfig.length);
     for (var i = 0; i < rowConfig.length; i++) {
       for (var j = 0; j < colConfig.length; j++) {
-        if (board[i][j].actual != -1) {
-          pBoard[i][j].actual = board[i][j].actual;
+        if (board[i][j] != -1) {
+          pBoard[i][j].actual = board[i][j];
         } else {
           for (var n = 0; n < solutions.length; n++) {
-            switch (solutions[n][i][j].actual) {
+            switch (solutions[n][i][j]) {
               case 0:
                 pBoard[i][j].zero++;
                 break;
@@ -212,10 +224,10 @@ app.factory('voltorb', [function() {
           }
           if (pBoard[i][j].zero == solutions.length) {
             pBoard[i][j].actual = 0;
-            pBoard[i][j].isAutofill = true;
+            pBoard[i][j].isVoltorb = true;
           } else if (pBoard[i][j].one == solutions.length) {
             pBoard[i][j].actual = 1;
-            pBoard[i][j].isAutofill = true;
+            pBoard[i][j].isAutofill = false;  // 1's are useless
           } else if (pBoard[i][j].two == solutions.length) {
             pBoard[i][j].actual = 2;
             pBoard[i][j].isAutofill = true;
@@ -223,6 +235,9 @@ app.factory('voltorb', [function() {
             pBoard[i][j].actual = 3;
             pBoard[i][j].isAutofill = true;
           } else {
+            if (pBoard[i][j].zero == 0) {
+              pBoard[i][j].isSafe = true;
+            }
             pBoard[i][j].zero /= solutions.length;
             pBoard[i][j].one /= solutions.length;
             pBoard[i][j].two /= solutions.length;
@@ -231,7 +246,7 @@ app.factory('voltorb', [function() {
         }
       }
     }
-    return pBoard;
+    callback(pBoard);
   }
 
   return voltorb;
@@ -248,20 +263,7 @@ app.controller('MainCtrl', [
 
     $scope.cellSize = utils.calculateCellSize(numCols);
 
-    $scope.board = [];
-    for (var i = 0; i < numRows; i++) {
-      var row = [];
-      for (var j = 0; j < numCols; j++) {
-        row.push({
-          zero: -1,
-          one: -1,
-          two: -1,
-          three: -1,
-          actual: -1
-        });
-      }
-      $scope.board.push(row);
-    }
+    $scope.pBoard = voltorb.newPBoard(numRows, numCols);
 
     $scope.rowConfig = [];
     for (var i = 0; i < numRows; i++) {
@@ -315,7 +317,11 @@ app.controller('MainCtrl', [
     }];*/
 
     $scope.solve = function() {
-      $scope.board = voltorb.probabilities($scope.board, $scope.rowConfig, $scope.colConfig);
+      $scope.solving = true;
+      voltorb.probabilities(voltorb.generateBoard($scope.pBoard), $scope.rowConfig, $scope.colConfig, function(pBoard) {
+        $scope.pBoard = pBoard;
+        $scope.solving = false;
+      });
 
       /*var minP = 1;
       for (var i=0; i<$scope.rowConfig.length; i++) {
@@ -337,7 +343,7 @@ app.controller('MainCtrl', [
     }
 
     $scope.beautify = function(n) {
-      return Math.round(n * 10000) / 10000;
+      return Math.round(n * 100) / 100;
     }
 
   }

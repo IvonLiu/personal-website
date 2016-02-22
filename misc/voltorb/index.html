@@ -50,9 +50,9 @@
           </div>
           <div class="panel-body">
             <div id="board">
-              <div ng-repeat="row in board">
+              <div ng-repeat="row in pBoard">
                 <div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
-                  <div class="card-body-border {{cell.isOptimal?'card-optimal':''}} {{cell.isAutofill?'card-autofill':''}}">
+                  <div class="card-body-border {{cell.isOptimal?'card-optimal':''}} {{cell.isAutofill?'card-autofill':''}} {{cell.isVoltorb?'card-voltorb':''}} {{cell.isSafe?'card-safe':''}}">
                     <div class="row">
                       <div class="col-xs-6" style="text-align:center;height:{{cellSize/4}}px">
                         <h4 ng-show="cell.actual == -1">{{beautify(cell.zero)}}</h4>
@@ -80,12 +80,12 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-xs-12">
-                        <input type="number" class="form-control" ng-model="rowConfig[$index].points">
+                        <input type="number" class="form-control" ng-model="rowConfig[$index].points" tabindex="{{2*($index+1) - 1}}">
                       </div>
                     </div>
                     <div class="row" style="margin-top:16px">
                       <div class="col-xs-12">
-                        <input type="number" class="form-control" ng-model="rowConfig[$index].voltorbs">
+                        <input type="number" class="form-control" ng-model="rowConfig[$index].voltorbs" tabindex="{{2*($index+1)}}">
                       </div>
                     </div>
                   </div>
@@ -96,19 +96,20 @@
                   <div class="card-body">
                     <div class="row">
                       <div class="col-xs-12">
-                        <input type="number" class="form-control" ng-model="colConfig[$index].points">
+                        <input type="number" class="form-control" ng-model="colConfig[$index].points" tabindex="{{2*rowConfig.length + 2*($index+1) - 1}}">
                       </div>
                     </div>
                     <div class="row" style="margin-top:16px">
                       <div class="col-xs-12">
-                        <input type="number" class="form-control" ng-model="colConfig[$index].voltorbs">
+                        <input type="number" class="form-control" ng-model="colConfig[$index].voltorbs" tabindex="{{2*rowConfig.length + 2*($index+1)}}">
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <button ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
+            <button ng-hide="solving" ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
+            <button ng-show="solving" disabled ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
           </div>
         </div>
       </div>

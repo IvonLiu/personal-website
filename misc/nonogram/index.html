@@ -1,0 +1,118 @@
+<html>
+
+<head>
+  <title>Nonogram</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries -->
+
+  <!-- Import angular.js -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="css/main.css" />
+
+</head>
+
+<body ng-app="nonogram" ng-controller="MainCtrl">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">nonogram</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <!--<li id="nav-display"><a id="nav-link-display" href="#/display">Display</a></li>
+            <li id="nav-generate"><a id="nav-link-generate" href="#/generate">Generate</a></li>-->
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Config
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <form ng-submit="showConfig()">
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <label for="numRows">Number of Rows</label>
+                  <input id="numRows" type="number" ng-model="numRows" class="form-control">
+                </div>
+                <div class="form-group col-xs-6">
+                  <label for="numCols">Number of Columns</label>
+                  <input id="numCols" type="number" ng-model="numCols" class="form-control">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary col-xs-12">Show Input</button>
+            </form>
+          </div>
+          <div class="col-xs-12" style="margin-top:32px">
+            <form ng-submit="solve()" ng-show="rowConfig && colConfig">
+              <div class="row">
+                <div class="col-xs-6">
+                  <label>Rows</label>
+                  <div class="row">
+                    <div class="form-group col-xs-12" ng-repeat="item in rowConfig track by $index">
+                      <input type="text" ng-model="rowConfig[$index]" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <label>Columns</label>
+                  <div class="row">
+                    <div class="form-group col-xs-12" ng-repeat="item in colConfig track by $index">
+                      <input type="text" ng-model="colConfig[$index]" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary col-xs-12">Solve</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6 col-xs-offset-3">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Solution
+          </div>
+          <div class="panel-body">
+            <div id="graph" class="noselect">
+              <div ng-repeat="row in bitmap">
+                <div ng-repeat="cell in row track by $index" style="background:{{cell==1?'black':'transparent'}};width:{{cellSize}}px;min-height:{{cellSize}}px;display:inline-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

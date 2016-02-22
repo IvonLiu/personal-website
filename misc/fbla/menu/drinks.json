@@ -1,0 +1,41 @@
+[{
+  "name": "Spa Cosmo Martini",
+  "description": "Vodka, fresh muddled cucumber, cranberry juice, fresh squeezed lime juice",
+  "price": 9
+}, {
+  "name": "Classic Mojito",
+  "description": "Appleton White rum, mint, lime, soda water",
+  "price": 9.5
+}, {
+  "name": "Elderflower Collins",
+  "description": "gin, elderflower, fresh squeezed grapefruit",
+  "price": 8
+}, {
+  "name": "Summer Sangria",
+  "description": "Red wine, white wine, Spanish brandy, fruit juices, fresh fruit",
+  "price": 8
+}, {
+  "name": "Passionfruit Margarita",
+  "description": "Passionfruit, mango, El Jimador tequila, fresh squeezed lime, egg whites",
+  "price": 8
+}, {
+  "name": "Primm's Cup",
+  "description": "Primm's No.1, ginger ale, fresh lemon-lime slush, cucumber",
+  "price": 8.5
+}, {
+  "name": "Stiff Lemonade",
+  "description": "Pearl vodka, fresh lemon-lime slush, lemoncello liqueur",
+  "price": 7
+}, {
+  "name": "Real Peach Bellini",
+  "description": "Appleton V/X rum, real peach molasses, sparkling wine, and red sangria",
+  "price": 7.5
+}, {
+  "name": "Super Sonic Gin & Tonic",
+  "description": "Gorgons gin, tonic, fresh lemon-lime slush",
+  "price": 8.5
+}, {
+  "name": "Super Stoked Vodka Coke",
+  "description": "Smirnoff cherry or vanilla vodka, Coca Cola, fresh lemon-lime slush",
+  "price": 8.5
+}]

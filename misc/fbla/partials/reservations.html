@@ -1,0 +1,72 @@
+<div class="container vertical-centered-container fade" style="padding-top:64px" ng-hide="thankYou">
+  <form class="form-horizontal" style="width:50%" ng-submit="createReservation()">
+    <div class="form-group">
+      <label for="party-size" class="col-xs-3 control-label">How many?</label>
+      <div class="col-xs-9">
+        <div class="input-group">
+          <input type="number" min="0" class="form-control" id="party-size" ng-model="partySize">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group fade" ng-show="partySize">
+      <label for="time" class="col-xs-3 control-label">What day?</label>
+      <div class="col-xs-9">
+        <div class="input-group date" id="date-picker">
+          <!-- <input type="text" class="form-control" id="date" ng-model="date" /> -->
+          <input type="text" class="form-control" id="date" ng-model="date" date-time-picker data-format="L" data-use-current="true" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group fade" ng-show="date">
+      <label for="time" class="col-xs-3 control-label">What time?</label>
+      <div class="col-xs-9">
+        <div class="input-group date" id="time-picker">
+          <!-- <input type="text" class="form-control" id="time" ng-model="time" /> -->
+          <input type="text" class="form-control" id="time" ng-model="time" date-time-picker data-format="LT" data-use-current="true" />
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group fade" ng-hide="noFreeSpots">
+      <div class="col-xs-offset-3 col-xs-9">
+        <ul class="timeslots">
+          <li ng-repeat="timeslot in availableTimes" class="{{timeslot.occupied ? 'occupied' : ''}} {{timeslot.selected ? 'selected' : ''}}"><a ng-click="selectTimeslot(timeslot)">{{timeslot.datetime.format('LT')}}</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group fade" ng-show="noFreeSpots">
+      <div class="col-xs-offset-3 col-xs-9">
+        <h4>There are no available spots within 1 hour of your chosen time.</h4>
+      </div>
+    </div>
+    <div class="form-group fade" ng-show="reservationTime">
+      <label for="email" class="col-xs-3 control-label">Email</label>
+      <div class="col-xs-9">
+        <div class="input-group">
+          <input type="email" class="form-control" id="email" ng-model="email">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group fade" ng-show="email">
+      <div class="col-xs-offset-3 col-xs-9">
+        <button type="submit" class="btn btn-default">Reserve</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="container centered-container fade" ng-show="thankYou">
+  <h1>Thank You!</h1>
+  <h3>Your reservation has been received.</h3>
+</div>

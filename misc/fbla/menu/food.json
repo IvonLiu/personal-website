@@ -1,0 +1,41 @@
+[{
+  "name": "Chili Chicken",
+  "description": "tempura style, cool cucumbers, chili sauce",
+  "price": 12
+}, {
+  "name": "Calamari Fritti",
+  "description": "tempura vegetables, spicy aioli*",
+  "price": 13
+}, {
+  "name": "Japanese Gyoza",
+  "description": "pork dumplings with hot mustard",
+  "price": 12
+}, {
+  "name": "Lettuce Wraps",
+  "description": "toasted peanuts, crispy noodles, fresh cilantro + chicken or shrimp",
+  "price": 12.5
+}, {
+  "name": "Pesto Shrimp Flatbreat",
+  "description": "whole milk mozzarella, sundried tomatoes, chipotle aioli",
+  "price": 14.5
+}, {
+  "name": "Tandoori Chicken Flatbread",
+  "description": "chutney, red onion, cilantro, yogurt",
+  "price": 14.5
+}, {
+  "name": "Hot Wings",
+  "description": "Frank's hot sauce, creamy blue cheese dip",
+  "price": 12
+}, {
+  "name": "Yam Fries",
+  "description": "grated Grana Padano, truffle lemon aioli",
+  "price": 8.5
+}, {
+  "name": "Caesar Starter",
+  "description": "+ chicken $4",
+  "price": 7
+}, {
+  "name": "House Salad Starter",
+  "description": "+ chicken $4",
+  "price": 7
+}]

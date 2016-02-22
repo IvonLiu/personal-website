@@ -1,0 +1,5 @@
+<nav class="navbar navbar-inverse navbar-fixed-top {{$state.includes('home')?'navbar-transparent':''}}">
+  <div ui-view="navbar"></div>
+</nav>
+
+<div ui-view="main" class="{{$state.includes('home')?'':'main-content'}}"></div>

@@ -42,76 +42,75 @@
   </nav>
 
   <div class="container">
-
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Board
-      </div>
-      <div class="panel-body">
-        <div id="board">
-          <div ng-repeat="row in board">
-            <div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
-              <div class="card-body-border {{cell.isOptimal?'card-optimal':''}} {{cell.isAutofill?'card-autofill':''}}">
-                <div class="row">
-                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
-                    <h4 ng-show="cell.actual == -1">{{beautify(cell.zero)}}</h4>
-                    <h4 ng-hide="cell.actual == -1">--</h4>
-                  </div>
-                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
-                    <h4 ng-show="cell.actual == -1">{{beautify(cell.one)}}</h4>
-                    <h4 ng-hide="cell.actual == -1">--</h4>
-                  </div>
-                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
-                    <h4 ng-show="cell.actual == -1">{{beautify(cell.two)}}</h4>
-                    <h4 ng-hide="cell.actual == -1">--</h4>
-                  </div>
-                  <div class="col-xs-6" style="text-align:center;height:{{cellSize/3}}px">
-                    <h4 ng-show="cell.actual == -1">{{beautify(cell.three)}}</h4>
-                    <h4 ng-hide="cell.actual == -1">--</h4>
-                  </div>
-                  <div class="col-xs-12" style="height:{{cellSize/3}}px">
-                    <input type="number" class="form-control" ng-model="cell.actual">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <label>Points</label>
-                    <input type="number" class="form-control" ng-model="rowConfig[$index].points">
-                  </div>
-                </div>
-                <div class="row" style="margin-top:16px">
-                  <div class="col-xs-12">
-                    <label>Voltorbs</label>
-                    <input type="number" class="form-control" ng-model="rowConfig[$index].voltorbs">
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            Board
           </div>
-          <div>
-            <div ng-repeat="cell in colConfig track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <label>Points</label>
-                    <input type="number" class="form-control" ng-model="colConfig[$index].points">
+          <div class="panel-body">
+            <div id="board">
+              <div ng-repeat="row in board">
+                <div ng-repeat="cell in row track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+                  <div class="card-body-border {{cell.isOptimal?'card-optimal':''}} {{cell.isAutofill?'card-autofill':''}}">
+                    <div class="row">
+                      <div class="col-xs-6" style="text-align:center;height:{{cellSize/4}}px">
+                        <h4 ng-show="cell.actual == -1">{{beautify(cell.zero)}}</h4>
+                        <h4 ng-hide="cell.actual == -1">--</h4>
+                      </div>
+                      <div class="col-xs-6" style="text-align:center;height:{{cellSize/4}}px">
+                        <h4 ng-show="cell.actual == -1">{{beautify(cell.one)}}</h4>
+                        <h4 ng-hide="cell.actual == -1">--</h4>
+                      </div>
+                      <div class="col-xs-6" style="text-align:center;height:{{cellSize/4}}px">
+                        <h4 ng-show="cell.actual == -1">{{beautify(cell.two)}}</h4>
+                        <h4 ng-hide="cell.actual == -1">--</h4>
+                      </div>
+                      <div class="col-xs-6" style="text-align:center;height:{{cellSize/4}}px">
+                        <h4 ng-show="cell.actual == -1">{{beautify(cell.three)}}</h4>
+                        <h4 ng-hide="cell.actual == -1">--</h4>
+                      </div>
+                      <div class="col-xs-12" style="height:{{cellSize/2}}px">
+                        <input type="number" class="form-control" ng-model="cell.actual">
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="row" style="margin-top:16px">
-                  <div class="col-xs-12">
-                    <label>Voltorbs</label>
-                    <input type="number" class="form-control" ng-model="colConfig[$index].voltorbs">
+                <div style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input type="number" class="form-control" ng-model="rowConfig[$index].points">
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top:16px">
+                      <div class="col-xs-12">
+                        <input type="number" class="form-control" ng-model="rowConfig[$index].voltorbs">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div ng-repeat="cell in colConfig track by $index" style="width:{{cellSize}}px;height:{{cellSize}}px;display:inline-block" class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input type="number" class="form-control" ng-model="colConfig[$index].points">
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top:16px">
+                      <div class="col-xs-12">
+                        <input type="number" class="form-control" ng-model="colConfig[$index].voltorbs">
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <button ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
           </div>
         </div>
-        <button ng-click="solve()" class="btn btn-primary col-xs-12">Solve</button>
       </div>
     </div>
 

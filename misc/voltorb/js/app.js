@@ -24,7 +24,7 @@ app.factory('voltorb', [function() {
       board.push(row);
     }
     return board;
-  }
+  };
 
   voltorb.newPBoard = function(numRows, numCols) {
     var board = [];
@@ -42,7 +42,7 @@ app.factory('voltorb', [function() {
       board.push(row);
     }
     return board;
-  }
+  };
 
 
   voltorb.copy = function(board) {
@@ -55,7 +55,7 @@ app.factory('voltorb', [function() {
       copy.push(row);
     }
     return copy;
-  }
+  };
 
   voltorb.nextBoard = function(board, value) {
     var copy = voltorb.copy(board);
@@ -91,7 +91,7 @@ app.factory('voltorb', [function() {
       }
     }
     return count;
-  }
+  };
 
   voltorb.colCount = function(board, col) {
     var count = {
@@ -114,7 +114,7 @@ app.factory('voltorb', [function() {
       }
     }
     return count;
-  }
+  };
 
   voltorb.isValidIntermediate = function(board, rowConfig, colConfig) {
 
@@ -144,7 +144,7 @@ app.factory('voltorb', [function() {
 
     return true;
 
-  }
+  };
 
   voltorb.isValidSolution = function(board, rowConfig, colConfig) {
 
@@ -162,7 +162,7 @@ app.factory('voltorb', [function() {
     }
     return true;
 
-  }
+  };
 
   voltorb.solutions = function(board, rowConfig, colConfig) {
     var solutions = [];
@@ -180,10 +180,11 @@ app.factory('voltorb', [function() {
       } else {
         if (voltorb.isValidSolution(board, rowConfig, colConfig)) {
           solutions.push(board);
+          break;
         }
       }
     }
-  }
+  };
 
   voltorb.generateBoard = function(pBoard) {
     var board = [];
@@ -195,11 +196,11 @@ app.factory('voltorb', [function() {
       board.push(row);
     }
     return board;
-  }
+  };
 
-  voltorb.probabilities = function(board, rowConfig, colConfig, callback) {
-
+  voltorb.probabilities = function(board, rowConfig, colConfig) {
     var solutions = voltorb.solutions(board, rowConfig, colConfig);
+    console.log(solutions.length);
     var pBoard = voltorb.newPBoard(rowConfig.length, colConfig.length);
     for (var i = 0; i < rowConfig.length; i++) {
       for (var j = 0; j < colConfig.length; j++) {
@@ -246,8 +247,8 @@ app.factory('voltorb', [function() {
         }
       }
     }
-    callback(pBoard);
-  }
+    return pBoard;
+  };
 
   return voltorb;
 }])
@@ -317,11 +318,8 @@ app.controller('MainCtrl', [
     }];*/
 
     $scope.solve = function() {
-      $scope.solving = true;
-      voltorb.probabilities(voltorb.generateBoard($scope.pBoard), $scope.rowConfig, $scope.colConfig, function(pBoard) {
-        $scope.pBoard = pBoard;
-        $scope.solving = false;
-      });
+      //$scope.solving = true;
+      $scope.pBoard = voltorb.probabilities(voltorb.generateBoard($scope.pBoard), $scope.rowConfig, $scope.colConfig);
 
       /*var minP = 1;
       for (var i=0; i<$scope.rowConfig.length; i++) {

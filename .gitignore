@@ -1,3 +1,7 @@
 ivonliu_xyz.zip
 *.psd
-secret/
+
+# FTP credentials (see AGENTS.md)
+.env
+.DS_Store
+.claude/settings.local.json

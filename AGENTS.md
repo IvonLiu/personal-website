@@ -10,6 +10,7 @@ step) on Namecheap shared hosting, updated over FTP.
   - `index.html`: the homepage (Materialize 0.97 from `css/` and `js/`, jQuery 2.1.1 from a
     CDN).
   - `css/`, `js/`, `font/`, `images/`: homepage assets.
+  - `.htaccess`: redirects HTTP to HTTPS.
   - New standalone pages go in `misc/<name>/`, each with its own `index.html` and assets,
     unless Ivon says otherwise. Use relative links.
   - The old side projects that used to live in `misc/` and `secret/` were taken down
@@ -20,9 +21,11 @@ step) on Namecheap shared hosting, updated over FTP.
 - The server also holds `cgi-bin/` and `.ftpquota`. The host manages them, they aren't in
   the repo, and deploys leave them alone.
 
-To preview locally, run `python3 -m http.server 8000 -d public_html`. The live site is
-served over `http://ivonliu.com`; HTTPS currently presents the host's `*.web-hosting.com`
-certificate.
+To preview locally, run `python3 -m http.server 8000 -d public_html` (it ignores
+`.htaccess`). The live site is `https://ivonliu.com`. Its Let's Encrypt certificate covers
+`ivonliu.com` and `www.ivonliu.com`, and acme.sh issues and renews it from a cron job on the
+server, outside the web root and outside this repo. cPanel's Force HTTPS Redirect is
+disabled on this host, which is why the redirect lives in `.htaccess`.
 
 ## FTP credentials
 

@@ -72,8 +72,7 @@ can't exist in git, so deleting an empty server directory is fine.
 
 Run the command again without `--dry-run`, with any extra excludes you agreed on. Then:
 
-- Spot-check a changed page with `curl -sI http://ivonliu.com/<path>`. Use HTTP, not HTTPS:
-  HTTPS presents the host's `*.web-hosting.com` certificate.
+- Spot-check a changed page with `curl -sI https://ivonliu.com/<path>`.
 - Tell Ivon what went up and what came down.
 - Uploading uncommitted edits and new files is fine. If `git status` isn't clean, say so
   and offer to commit and push to `master`.

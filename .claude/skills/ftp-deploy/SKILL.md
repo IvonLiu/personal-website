@@ -6,9 +6,8 @@ description: Make the ivonliu.com FTP server match the repo's public_html/ folde
 # Deploy public_html/ to FTP
 
 The goal: the server's web root ends up exactly like local `public_html/`. New and changed
-files get uploaded, and files that are gone locally get deleted from the server. Treat this
-as a quick conversation with Ivon, not a script. Look at what's about to happen, describe it
-in plain words, and ask when something looks off.
+files get uploaded, and files that are gone locally get deleted from the server. Keep it
+quick: do a dry run, and if it looks reasonable, deploy without asking again.
 
 ## The command
 
@@ -32,55 +31,39 @@ ask Ivon to fill it in from `.env.example`.
 
 ## 1. Dry run
 
-Run the command with `--dry-run` and summarize for Ivon what would be uploaded and what would
-be deleted. In lftp's dry-run notation, an upload looks like
+Run the command with `--dry-run`. In lftp's dry-run notation, an upload looks like
 `get -e -O ftp://<host>/<dir> file:<local path>`, and a deletion looks like
 `rm -r ftp://<host>/<path>`.
 
-lftp compares file sizes and timestamps. From a fresh checkout or a worktree, every file
-looks changed and gets re-uploaded (~40 MB). That's harmless, so just mention it rather
-than listing every file.
+It looks reasonable when:
 
-Also glance at `git status --short --ignored public_html`. lftp uploads the folder, not git,
-so untracked and gitignored files inside `public_html/` (`*.psd`, `secret/` and so on)
-would go up too. Point out anything that doesn't look like it belongs on the site.
+- The uploads are the files you or Ivon changed. From a fresh checkout or a worktree, every
+  file looks changed, because lftp compares sizes and timestamps; that's harmless.
+- Each deletion is something removed in git. A quick
+  `git log -1 --format='%h %s' -- "public_html/<path>" "<path>"` on each `rm` path is
+  enough; don't list the server's contents recursively, because it's slow. (The second
+  pathspec covers history from before the site moved into `public_html/`.)
+- Nothing odd is going up. lftp uploads the folder, not git, so glance at
+  `git status --short --ignored public_html` for untracked or gitignored files.
 
-## 2. Check each deletion
+Stop and ask Ivon only when something doesn't fit: a deletion with no git history (probably
+put on the server by hand), an uncommitted deletion, or uploads you can't explain. To keep
+a server-only file, add an exclude so `--delete` skips it: `-X <name>` matches that name at
+any depth, and `-x '<regex>'` matches the path.
 
-Only delete a server file if a local commit deleted it. For a deletion candidate `<path>`
-(relative to `public_html/`):
+## 2. Deploy
 
-```bash
-git log -1 --format='%h %ad %s' --date=short -- "public_html/<path>" "<path>"
-git cat-file -e "HEAD:public_html/<path>" && echo "still in HEAD"
-```
-
-The second pathspec in `git log` covers history from before the site moved into
-`public_html/`. Check a whole directory at once where that makes sense. Empty directories
-can't exist in git, so deleting an empty server directory is fine.
-
-- **Deleted in a commit** (`git log` finds it and it's not in HEAD): fine to delete.
-- **Still in HEAD, missing locally**: an uncommitted deletion. Ask whether to commit it or
-  `git restore` it.
-- **Never in git**: someone put it on the server by hand, or the host manages it. Don't
-  delete it. Ask Ivon whether to pull it into `public_html/` and commit it, keep it on the
-  server, or delete it. To keep it, add an exclude so `--delete` skips it: `-X <name>`
-  matches that name at any depth, and `-x '<regex>'` matches the path. If it's something
-  that should always stay, add the exclude to the command in this file.
-
-## 3. Upload
-
-Run the command again without `--dry-run`, with any extra excludes you agreed on. Then:
+Run the same command without `--dry-run`. Then:
 
 - Spot-check a changed page with `curl -sI https://ivonliu.com/<path>`.
-- Tell Ivon what went up and what came down.
+- Tell Ivon in a line or two what went up and what came down.
 - Uploading uncommitted edits and new files is fine. If `git status` isn't clean, say so
   and offer to commit and push to `master`.
 
 ## Is the server in sync?
 
-The dry run only compares sizes and timestamps. For a real content check, download the web
-root and diff it (~40 MB):
+Only when Ivon asks: the dry run compares sizes and timestamps, so for a real content check,
+download the web root and diff it:
 
 ```bash
 set -a && source /Users/ivon/Develop/personal-website/.env && set +a &&

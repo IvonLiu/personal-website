@@ -10,10 +10,11 @@ step) on Namecheap shared hosting, updated over FTP.
   - `index.html`: the homepage (Materialize 0.97 from `css/` and `js/`, jQuery 2.1.1 from a
     CDN).
   - `css/`, `js/`, `font/`, `images/`: homepage assets.
-  - `misc/<name>/`: standalone side projects, each with its own `index.html` and assets.
-    Put new standalone pages here unless Ivon says otherwise, and use relative links.
-  - `secret/mesnotes/`: an old Angular + Parse app. The folder name is historical; the page
-    is public. It renders blank because Parse shut down in 2017.
+  - New standalone pages go in `misc/<name>/`, each with its own `index.html` and assets,
+    unless Ivon says otherwise. Use relative links.
+  - The old side projects that used to live in `misc/` and `secret/` were taken down
+    because they no longer worked. They're still in git history; see the commit "Take down
+    old misc and secret projects".
 - Everything else at the top level stays in the repo only: this file, `CLAUDE.md`,
   `.claude/`, `.env` and so on.
 - The server also holds `cgi-bin/` and `.ftpquota`. The host manages them, they aren't in

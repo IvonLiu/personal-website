@@ -1,173 +1,38 @@
-<html>
-
-    <head>
-        <title>Ivon Liu</title>
-
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-        <link type="text/css" rel="stylesheet" href="css/main.css"/>
-
-        <!--Let browser know website is optimized for mobile-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-
-    <body>
-
-        <img src="images/background.jpg" class="background-image"/>
-
-        <div class="content">
-
-            <div id="header" class="fullscreen header">
-                <div class="header-content">
-                    <div id="profile-circle" class="profile-circle">
-                        <div id="profile-pic-1" class="active-circle">
-                            <img src="images/profile.jpg" class="profile-image bordered-circle"/>
-                        </div>
-                        <!--<div id="profile-pic-2">
-                            <img src="images/flat_gradient.png" class="profile-image bordered-circle"/>
-                        </div>-->
-                    </div>
-                    <div class="header-text-container">
-                        <h1 class="header-text">Ivon Liu</h1>
-                        <!--<h5 class="header-text">where idealism meets pragmatism</h5>-->
-                        <h5 class="header-text">student &bull; developer &bull; innovator</h5>
-                        <ul class="social-links">
-                            <li><a href="mailto:me@ivonliu.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
-                            <li><a href="https://twitter.com/Ivon_Liu" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://open.spotify.com/user/ivonliu" target="_blank"><i class="fa fa-spotify"></i></a></li>
-                            <li><a href="https://github.com/IvonLiu" target="_blank"><i class="fa fa-github"></i></a></li>
-                            <li><a href="https://www.linkedin.com/in/ivonliu" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="more">
-                    <a id="more" href="#" class="btn btn-circle"><i class="fa fa-angle-down animated"></i></a>
-                </div>
-            </div>
-
-            <div id="slide1" class="fullscreen slide1">
-                <h1 class="slide1-title">Projects</h1>
-                <div class="row">
-                    <div class="col s12 m6 l4">
-                        <div class="card medium">
-                            <div class="card-image">
-                                <img src="images/pedometer_bg.png">
-                                <span class="card-title background-gradient">Pedometer</span>
-                            </div>
-                            <div class="card-content">
-                                <p>Low-powered pedometer app using the hardware step counter API introduced in Android 4.4 Kitkat</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="https://play.google.com/store/apps/details?id=com.ivon.pedometer" target="_blank">Google Play</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l4">
-                        <div class="card medium">
-                            <div class="card-image">
-                                <img src="images/kaggle_bg.png">
-                                <span class="card-title background-gradient">Coupon Purchase Prediction</span>
-                            </div>
-                            <div class="card-content">
-                                <p>Use cosine similarity to predict which coupons users are likely to purchase</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="https://github.com/AJLiu/SPCSAI-CouponPurchasePrediction" target="_blank">Github</a>
-                                <a href="https://www.kaggle.com/c/coupon-purchase-prediction" target="_blank">Kaggle</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l4">
-                        <div class="card medium">
-                            <div class="card-image">
-                                <img src="images/moscrop_app_bg.png">
-                                <span class="card-title background-gradient">Moscrop App</span>
-                            </div>
-                            <div class="card-content">
-                                <p>Official app of Moscrop Secondary School</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="https://play.google.com/store/apps/details?id=com.moscrop.official" target="_blank">Android</a>
-                                <a href="http://moscropsecondary.parseapp.com/" target="_blank">Web</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l4">
-                        <div class="card medium">
-                            <div class="card-image">
-                                <img src="images/jimpath_bg.png">
-                                <span class="card-title background-gradient">JimPath</span>
-                            </div>
-                            <div class="card-content">
-                                <p>Travel app startup that lets users share their journeys and borrow highlights from others</p>
-                            </div>
-                            <div class="card-action">
-                                <a href="http://biz-intouch.com/" target="_blank">More Info</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <ul class="nav-links">
-                        <li><a id="nav-top" href="#">Top</a></li>
-                        <li><a id="nav-projects" href="#">Projects</a></li>
-                        <li><a href="resume.pdf" target="_blank">Resume</a></li>
-                    </ul>
-                    <p>&copy; Ivon Liu 2015</p>
-                </div>
-            </div>
-
-        </div>
-
-        <!--Import jQuery before materialize.js-->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="js/materialize.js"></script>
-        <script src="js/jquery.easing.min.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                //$('#profile-circle').hover(showMore, showProfilePic);
-                /*$("#more").click(function() {
-                    $('html, body').animate({
-                        scrollTop: $("#slide1").offset().top
-                    }, 'slow');
-                });*/
-                // jQuery for page scrolling feature - requires jQuery Easing plugin
-                $(function() {
-                    $('#more').bind('click', function(event) {
-                        $('html, body').stop().animate({
-                            scrollTop: $("#slide1").offset().top
-                        }, 700, 'easeInOutExpo');
-                        event.preventDefault();
-                    });
-                   $('#nav-top').bind('click', function(event) {
-                        $('html, body').stop().animate({
-                            scrollTop: $("#header").offset().top
-                        }, 700, 'easeInOutExpo');
-                        event.preventDefault();
-                    });
-                    $('#nav-projects').bind('click', function(event) {
-                        $('html, body').stop().animate({
-                            scrollTop: $("#slide1").offset().top
-                        }, 700, 'easeInOutExpo');
-                        event.preventDefault();
-                    });
-                });
-            });
-
-            function showMore() {
-                $('.active-circle').not('#profile-pic-2').stop().removeClass('active-circle');
-                $('#profile-pic-2').stop().addClass('active-circle');
-            }
-
-            function showProfilePic() {
-                $('.active-circle').not('#profile-pic-1').stop().removeClass('active-circle');
-                $('#profile-pic-1').stop().addClass('active-circle');
-            }
-        </script>
-
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ivon Liu</title>
+    <style>
+        :root { color-scheme: light dark; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background: #fff;
+            color: #222;
+        }
+        main { padding: 2rem 1rem; }
+        h1 { margin: 0 0 1rem; font-size: 2rem; font-weight: 600; }
+        ul { margin: 0; padding: 0; list-style: none; }
+        a { color: inherit; }
+        @media (prefers-color-scheme: dark) {
+            body { background: #111; color: #eee; }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Ivon Liu</h1>
+        <ul>
+            <li><a href="mailto:me@ivonliu.com">me@ivonliu.com</a></li>
+            <li><a href="tel:+6594801098">+65 9480 1098</a></li>
+        </ul>
+    </main>
+</body>
 </html>

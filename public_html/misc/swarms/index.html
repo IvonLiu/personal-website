@@ -1,0 +1,85 @@
+<html>
+
+<head>
+  <title>Swarm Experiment Helper</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="container" style="padding-top:16px">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="panel panel-default">
+          <div class="panel-body" id="main">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="First and last name">
+            </div>
+            <button class="btn btn-default" onclick="submit()">Submit</button>
+            <div id="result"></div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body" id="assign">
+            <div class="form-group">
+              <label for="uid">User ID</label>
+              <input type="text" class="form-control" id="uid" placeholder="User ID">
+            </div>
+            <button class="btn btn-default" onclick="assign()">Assign me a room!</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+  <script>
+
+    var experiment = 'experiment3';
+    var users;
+
+    $(document).ready(function() {
+
+      var config = {
+        apiKey: "AIzaSyBtVOUBDqyaEcDfulKo2udhutVUxMvjX78",
+        authDomain: "swarm-experiment.firebaseapp.com",
+        databaseURL: "https://swarm-experiment.firebaseio.com",
+        storageBucket: ""
+      };
+      firebase.initializeApp(config);
+
+      firebase.database().ref(experiment + '/users').on('value', function(snapshot) {
+        users = snapshot.val();
+      })
+
+    });
+
+    submit = function() {
+      var id = new Date().getTime();
+      var name = $('#name').val();
+      $('#name').val('');
+      firebase.database().ref(experiment + '/users/' + id).set({
+        name: name
+      });
+      $('#main').html('<p>Your unique ID is: ' + id + '.</p><p>Please copy it and await further instructions :)')
+    }
+
+    assign = function() {
+      var id = $('#uid').val();
+      var url = users[id].url;
+      $('#assign').html('You have been assigned to this room: <a href="'+url+'">' + url + '</a>.');
+    }
+
+  </script>
+
+</body>
+
+</html>

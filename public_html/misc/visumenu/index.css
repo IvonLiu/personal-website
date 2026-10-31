@@ -1,0 +1,40 @@
+.aybell-frame {
+    border: none;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.aybell-launch {
+  background-color: #054358;  
+  border-radius: 5px;
+  color: white;
+  padding: .5em;
+  text-decoration: none;
+  font-family: sans-serif;
+}
+.aybell-launch:focus,
+.aybell-launch:hover {
+  background-color: #59b6ca;
+}
+
+.aybell-overlay {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.aybell-close {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.8);
+}
+
+.aybell-wrapper {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <title>Provincial Exam Score Notifier</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="container" style="padding-top:16px">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <div class="panel panel-default">
+          <div class="panel-body" id="main">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="First and last name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" placeholder="Email">
+            </div>
+            <button class="btn btn-default" onclick="submit()">Submit</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script>
+    submit = function() {
+      var name = $('#name').val();
+      var email = $('#email').val();
+      $('#name').val('');
+      $('#email').val('');
+
+      var data = JSON.stringify({
+        "name": name,
+        "email": email
+      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = false;
+
+      xhr.addEventListener("readystatechange", function() {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
+          $('#main').html('<p>Done</p>');
+        }
+      });
+
+      xhr.open("POST", "http://107.170.77.233:3000/add");
+      xhr.setRequestHeader("content-type", "application/json");
+
+      xhr.send(data);
+    }
+  </script>
+
+</body>
+
+</html>
